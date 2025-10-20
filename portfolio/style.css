@@ -399,4 +399,23 @@ body.dark-mode .resume h3 {
   color: #93c5fd;
 }
 
+.image-link {
+  text-align: center;
+  margin-top: 0.5rem;
+}
 
+.image-link a {
+  display: inline-block;
+  text-decoration: none;
+  color: #1e3a8a;
+  background: #eaf2fb;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+
+.image-link a:hover {
+  background: #3b82f6;
+  color: #fff;
+}

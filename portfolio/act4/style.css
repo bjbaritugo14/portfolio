@@ -1,0 +1,83 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.profile {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+}
+
+.profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.profile h1 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+  color: #333 white;
+}
+
+.profile p {
+  color: #555;
+  font-size: 1rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+button#btn-aboutme {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button#btn-aboutme:hover {
+  background-color: #0056b3;
+}
+
+.hide {
+  display: none;
+}
+
+#info {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #444;
+  font-size: 0.9rem;
+
+}body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark-mode .profile {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark-mode button {
+  background-color: #444;
+  color: #fff;
+}
+
+body.dark-mode button:hover {
+  background-color: #666;
+}

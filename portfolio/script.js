@@ -4,15 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const intro = document.getElementById('intro');
   const toggle = document.getElementById('toggle-darkmode');
 
-  //  Dark Mode Toggle 
+  // --- Dark Mode ---
   toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
   });
 
-  // About Me Toggle 
+  // --- About Me ---
   btnAboutme.addEventListener('click', function () {
     const showingInfo = !info.classList.contains('hide');
-
     if (showingInfo) {
       info.classList.add('hide');
       intro.classList.remove('hide');
@@ -24,38 +23,52 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Carousel Slider 
+  // --- Carousel ---
   const track = document.querySelector('.carousel-track');
   const slides = Array.from(track.children);
   const nextButton = document.querySelector('.carousel-btn.next');
   const prevButton = document.querySelector('.carousel-btn.prev');
   let currentIndex = 0;
+  let autoSlideInterval;
 
   function updateSlidePosition() {
     const slideWidth = slides[0].getBoundingClientRect().width;
     track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
   }
 
-  nextButton.addEventListener('click', () => {
+  function nextSlide() {
     currentIndex = (currentIndex + 1) % slides.length;
     updateSlidePosition();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateSlidePosition();
+  }
+
+  nextButton.addEventListener('click', () => {
+    nextSlide();
+    resetAutoSlide();
   });
 
   prevButton.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    updateSlidePosition();
+    prevSlide();
+    resetAutoSlide();
   });
 
-  // Auto slide every 3 seconds
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    updateSlidePosition();
-  }, 3000);
+  function startAutoSlide() {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(nextSlide, 3000);
+  }
 
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
 
-  // ===============================
-  // 📸 Image Modal Viewer Section
-  // ===============================
+  startAutoSlide();
+
+  // --- Modal Viewer ---
   const modal = document.createElement('div');
   modal.classList.add('image-modal', 'hide');
   modal.innerHTML = `
@@ -69,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalImage = modal.querySelector('.modal-image');
   const closeBtn = modal.querySelector('.close-btn');
 
-  // When any slide image is clicked → open modal
   slides.forEach(slide => {
     const img = slide.querySelector('img');
     if (img) {
@@ -81,11 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Close modal when X is clicked or background is clicked
-  closeBtn.addEventListener('click', () => {
-    modal.classList.add('hide');
-  });
-
+  closeBtn.addEventListener('click', () => modal.classList.add('hide'));
   modal.addEventListener('click', (e) => {
     if (e.target === modal) modal.classList.add('hide');
   });
